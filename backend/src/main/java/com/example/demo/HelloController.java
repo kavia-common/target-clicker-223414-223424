@@ -3,11 +3,14 @@ package com.example.demo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.MediaType;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.Map;
 
 /**
  * PUBLIC_INTERFACE
@@ -58,6 +61,18 @@ public class HelloController {
     @Operation(summary = "Health check", description = "Returns application health status")
     public String health() {
         return "OK";
+    }
+
+    /**
+     * PUBLIC_INTERFACE
+     * API-scoped health endpoint for frontend compatibility.
+     * Note: Actuator health is also available at /actuator/health and a basic check at /health.
+     * @return a small JSON payload indicating status UP.
+     */
+    @GetMapping(value = "/api/health", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "API health check", description = "Returns API health status in JSON format")
+    public Map<String, String> apiHealth() {
+        return Map.of("status", "UP");
     }
 
     /**
