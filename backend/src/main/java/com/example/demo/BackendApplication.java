@@ -8,7 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Entry point for the Spring Boot backend application.
  *
  * This application uses component scanning rooted at 'com.example.demo'
- * to discover controllers and other components under the same base package.
+ * to discover controllers, repositories, entities, and other components
+ * under the same base package. Repositories in com.example.demo.repository
+ * are auto-detected by Spring Data JPA.
  */
 @SpringBootApplication
 public class BackendApplication {
