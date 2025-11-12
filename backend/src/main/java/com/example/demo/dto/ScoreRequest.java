@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -20,6 +21,7 @@ public class ScoreRequest {
     @NotBlank(message = "playerName must not be blank")
     @Size(min = 1, max = 20, message = "playerName must be between 1 and 20 characters")
     @Schema(description = "Player display name", example = "Alice", minLength = 1, maxLength = 20, requiredMode = Schema.RequiredMode.REQUIRED)
+    @JsonAlias("name")
     private String playerName;
 
     @Min(value = 0, message = "score must be >= 0")

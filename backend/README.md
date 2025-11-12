@@ -25,4 +25,5 @@ H2 configuration notes:
 
 Devtools/hot reload stability:
 - `spring.devtools.restart.exclude` excludes build outputs and volatile files to prevent restart loops.
-- `spring.devtools.livereload.enabled=false` avoids classpath-triggered restarts in preview/CI environments.
+- `spring.devtools.restart.enabled=false`, `spring.devtools.add-properties=false`, and `spring.devtools.livereload.enabled=false` fully disable devtools in preview/CI.
+- File watch triggers are minimized; verify no automatic restarts occur after initial boot.

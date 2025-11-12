@@ -49,14 +49,22 @@ public class CorsConfig {
         // Allowed methods including OPTIONS for preflight
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 
-        // Common headers used by browsers and APIs
+        // Common headers used by browsers and APIs - broaden to reduce preflights
         config.setAllowedHeaders(Arrays.asList(
                 "Authorization",
                 "Cache-Control",
                 "Content-Type",
                 "X-Requested-With",
                 "Origin",
-                "Accept"
+                "Accept",
+                "Accept-Language",
+                "Accept-Encoding",
+                "DNT",
+                "If-Modified-Since",
+                "Keep-Alive",
+                "User-Agent",
+                "X-CSRF-Token",
+                "X-HTTP-Method-Override"
         ));
 
         // Expose some response headers to the browser if needed
