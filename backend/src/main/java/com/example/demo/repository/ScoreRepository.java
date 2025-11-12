@@ -20,6 +20,7 @@ public interface ScoreRepository extends JpaRepository<Score, Long> {
     /**
      * Returns scores ordered for leaderboard: score desc, createdAt asc.
      * Use Pageable to specify limit.
+     * PUBLIC_INTERFACE
      */
     @Query("SELECT s FROM Score s ORDER BY s.score DESC, s.createdAt ASC")
     List<Score> findLeaderboard(Pageable pageable);
@@ -27,6 +28,7 @@ public interface ScoreRepository extends JpaRepository<Score, Long> {
     /**
      * Counts how many scores are strictly greater than the provided score value.
      * Used to compute rank = countGreater + 1.
+     * PUBLIC_INTERFACE
      */
     @Query("SELECT COUNT(s) FROM Score s WHERE s.score > :score")
     long countByScoreStrictlyGreater(int score);

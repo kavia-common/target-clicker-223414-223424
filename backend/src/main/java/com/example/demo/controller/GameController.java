@@ -82,7 +82,6 @@ public class GameController {
         try {
             saved = scoreRepository.save(score);
         } catch (DataAccessException dae) {
-            // Bubble up as 500 with minimal message
             throw dae;
         }
 
@@ -107,8 +106,7 @@ public class GameController {
      * Retrieve the leaderboard with a limit. Orders by score desc then createdAt asc.
      *
      * @param limit Optional query param, default 10, max 50.
-     * @return A list of ScoreResponse without rank computation (rank is not strictly required for leaderboard items,
-     * but we can compute relative rank based on position if desired; here we compute absolute rank for clarity).
+     * @return A list of ScoreResponse including absolute rank.
      */
     @GetMapping(value = "/leaderboard", produces = "application/json")
     @Operation(
@@ -137,7 +135,6 @@ public class GameController {
         Pageable pageable = PageRequest.of(0, effectiveLimit);
         List<Score> entries = scoreRepository.findLeaderboard(pageable);
 
-        // Compute rank per entry using count of strictly greater scores
         List<ScoreResponse> responses = entries.stream().map(s -> {
             long rank = scoreRepository.countByScoreStrictlyGreater(s.getScore()) + 1;
             return new ScoreResponse(
